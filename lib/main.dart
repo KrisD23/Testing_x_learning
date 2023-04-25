@@ -13,10 +13,32 @@ class MyApp extends StatefulWidget {
 }
 
 class _MyAppState extends State<MyApp> {
+  var textSize = 3.00;
+  void fontIncrease() {
+    
+    setState(() {
+      textSize ++;
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
-    return const MaterialApp(
-      home: Scaffold(),
+    return MaterialApp(
+      home: Scaffold(
+        body: Column(
+          children: [
+             Text(
+              "Test",
+              style: TextStyle(fontSize: textSize),
+            ),
+            OutlinedButton.icon(
+              onPressed: fontIncrease,
+              icon: const Icon(Icons.add_to_photos_sharp),
+              label: const Text('Press me'),
+            ),
+          ],
+        ),
+      ),
     );
   }
 }
