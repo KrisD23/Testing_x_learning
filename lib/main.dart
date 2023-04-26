@@ -13,33 +13,54 @@ class MyApp extends StatefulWidget {
 }
 
 class _MyAppState extends State<MyApp> {
-  var textSize = 10.00;
-  var bgColor = 0; 
-  List <Color> colors = [Colors.black,Colors.white,Colors.amber,Colors.pinkAccent];
+  var textSize = 20.00;
+  var bgColor = 0;
+  List<Color> colors = [
+    const Color.fromARGB(255, 12, 232, 144),
+    Colors.white,
+    Colors.amber,
+    Colors.pinkAccent
+  ];
   void fontIncrease() {
     setState(() {
       textSize++;
     });
   }
-  void colorLeft (){
+
+  void colorLeft() {
     setState(() {
-      bgColor--;
+     if(bgColor <= 0){
+      bgColor = colors.length - 1;
+     }else {
+      bgColor --;
+     }
+     
     });
   }
-  void colorRight (){
+
+  void colorRight() {
     setState(() {
-      bgColor++;
+      if(bgColor >= colors.length-1){
+      bgColor = 0;
+     }else {
+      bgColor ++;
+     }
+     
     });
   }
 
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      home: Scaffold( appBar: AppBar(backgroundColor: colors[1]),
-      backgroundColor: colors[bgColor],
-      
+      home: Scaffold(
+        appBar: AppBar(
+          backgroundColor: Colors.black,
+          title: const Text('Hello everyone'),
+        ),
+        backgroundColor: colors[bgColor],
         body: Center(
-          child: Column(mainAxisSize: MainAxisSize.min,
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
             children: [
               Text(
                 "Hello world!",
@@ -55,12 +76,16 @@ class _MyAppState extends State<MyApp> {
               const SizedBox(
                 height: 23,
               ),
-              Row(mainAxisSize: MainAxisSize.min,
+              Row(
+                mainAxisSize: MainAxisSize.min,
                 children: [
                   FloatingActionButton.small(
                       onPressed: colorLeft,
                       child: const Icon(Icons.arrow_left)),
-                  const Text(' Change Color of the Screen ',style: TextStyle(fontSize: 16),),
+                  const Text(
+                    ' Change Color of the Screen ',
+                    style: TextStyle(fontSize: 16),
+                  ),
                   FloatingActionButton.small(
                       onPressed: colorRight,
                       child: const Icon(Icons.arrow_right))
